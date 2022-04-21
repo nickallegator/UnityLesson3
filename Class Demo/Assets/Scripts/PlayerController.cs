@@ -15,11 +15,13 @@ public class PlayerController : MonoBehaviour
 
 	private Vector3 moveDirection = Vector3.zero;
 	public CharacterController controller;
+	Health playerHealth;
 
 	void Start()
 	{
 		// Store reference to attached component
 		controller = GetComponent<CharacterController>();
+		playerHealth = GetComponent<Health>();
 		Cursor.visible = false;
 
 	}
@@ -56,6 +58,10 @@ public class PlayerController : MonoBehaviour
 			ScoreBehavior.AddScore();
             Destroy(hit.gameObject);
 
+		}
+		else if (hit.tag == "Damage")
+		{
+			playerHealth.OnDamage(20);
 		}
 	}
 }
